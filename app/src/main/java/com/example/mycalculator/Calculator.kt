@@ -237,7 +237,7 @@ fun Calculator(
 @Composable
 fun NumberButton(
     number: String,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onPress: () -> Unit
 ) {
     CalculatorButton(

@@ -64,7 +64,7 @@ class CalculatorViewModel : ViewModel() {
                     number1 = result.toString().take(15)
                 )
             }
-            
+
 
         }
 
