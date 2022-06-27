@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 val buttonSpacing = 10.dp
                 Calculator(
                     state = state,
-                    onAction = {/*viewModel::onAction**/},
+                    onAction = viewModel::onAction,
                     buttonSpacing = buttonSpacing,
                     modifier = Modifier
                         .fillMaxSize()

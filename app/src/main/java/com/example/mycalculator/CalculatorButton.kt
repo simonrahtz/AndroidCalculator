@@ -12,21 +12,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 
 @Composable
 fun CalculatorButton(
     symbol: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     onClick: () -> Unit,
     textColor: Color = Color.White
 ) {
     Box(contentAlignment = Alignment.Center,
         modifier = Modifier
             .clip(CircleShape)
-            .clickable { onClick }
+            .clickable { onClick() }
             .then(modifier)
     ) {
         Text(

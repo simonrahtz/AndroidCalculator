@@ -1,12 +1,9 @@
 package com.example.mycalculator
 
-sealed class CalculatorOperation(val Symbol: String){
+sealed class CalculatorOperation(val symbol: String){
     object Add: CalculatorOperation("+")
     object Subtract: CalculatorOperation("-")
-    object Multiply: CalculatorOperation("*")
+    object Multiply: CalculatorOperation("x")
     object Divide: CalculatorOperation("/")
-
-
-
 
 }

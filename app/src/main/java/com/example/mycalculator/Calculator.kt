@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -79,17 +80,26 @@ fun Calculator(
                 NumberButton(
                     number = "7", modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(7))
+                    }
                 )
                 NumberButton(
                     number = "8", modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(8))
+                    }
                 )
                 NumberButton(
                     number = "9", modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(9))
+                    }
                 )
                 OperationButton(
                     operation = "x",
@@ -110,19 +120,29 @@ fun Calculator(
                     number = "4",
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(4))
+                    }
                 )
                 NumberButton(
                     number = "5",
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(5))
+                    }
+
                 )
                 NumberButton(
                     number = "6",
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(6))
+                    }
                 )
                 OperationButton(
                     operation = "-",
@@ -143,18 +163,29 @@ fun Calculator(
                     number = "1",
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(1))
+                    }
                 )
                 NumberButton(
                     number = "2",
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)                )
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(2))
+                    }
+                )
                 NumberButton(
                     number = "3",
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .weight(1f)                )
+                        .weight(1f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(3))
+                    }
+                )
                 OperationButton(
                     operation = "+",
                     modifier = Modifier
@@ -174,7 +205,10 @@ fun Calculator(
                     number = "0",
                     modifier = Modifier
                         .aspectRatio(2f)
-                        .weight(2f)
+                        .weight(2f),
+                    onPress = {
+                        onAction(CalculatorAction.Number(0))
+                    }
                 )
 
                 OperationButton(
@@ -204,15 +238,16 @@ fun Calculator(
 @Composable
 fun NumberButton(
     number: String,
-    modifier: Modifier
-
+    modifier: Modifier,
+    onPress: () -> Unit
 ) {
     CalculatorButton(
         symbol = number,
         modifier = Modifier
             .background(MediumGrey)
             .then(modifier),
-        onClick = { CalculatorAction.Number(number.toInt()) })
+        onClick = onPress
+    )
 }
 
 @Composable
@@ -227,7 +262,8 @@ fun OperationButton(
         modifier = Modifier
             .background(Orange)
             .then(modifier),
-        onClick =  onPress )
+        onClick = { onPress }
+    )
 }
 
 @Composable
@@ -243,5 +279,6 @@ fun EditResultButton(
         modifier = Modifier
             .background(LightGrey)
             .then(modifier),
-        onClick = onPress )
+        onClick = onPress
+    )
 }
