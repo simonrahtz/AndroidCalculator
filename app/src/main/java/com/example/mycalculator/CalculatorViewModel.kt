@@ -43,24 +43,55 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun performCalculation() {
-        TODO("Not yet implemented")
+        val number1 = state.number1.toDoubleOrNull()
+        val number2 = state.number2.toDoubleOrNull()
+        if (number1 != null && number2 != null) {
+            val result = when (state.operation) {
+                CalculatorOperation.Add -> number1 + number2
+                CalculatorOperation.Subtract -> number1 - number2
+                CalculatorOperation.Multiply -> number1 * number2
+                CalculatorOperation.Divide -> number1 / number2
+                null -> return
+            }
+            //clear screen before displaying result
+            state = CalculatorState()
+            state = state.copy(number1 = result.toString().take(15))
+        }
+
     }
 
     private fun enterDecimal() {
-        if (state.operation == null && !state.number1.contains(".")
-            && state.number1.isNotBlank()
+        if (state.operation == null) {
+            if (!state.number1.contains(".")
+                && state.number1.isNotBlank()
+            ) {
+                state = state.copy(
+                    number1 = state.number1 + "."
+                )
+                return
+            }
+        } else if (!state.number2.contains(".")
+            && state.number2.isNotBlank()
         ) {
             state = state.copy(
-                number1 = state.number1 + "."
+                number2 = state.number2 + "."
             )
             return
         }
+
     }
 
     private fun enterNumber(number: Int) {
-        state = state.copy(
-            number1 = state.number1 + number
-        )
+        state = if (state.operation == null) {
+            state.copy(
+                number1 = state.number1 + number
+            )
+        } else {
+            state.copy(
+                number2 = state.number2 + number
+            )
+        }
+
 
     }
 }
