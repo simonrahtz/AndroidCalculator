@@ -1,10 +1,10 @@
 package com.example.mycalculator
 
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import kotlin.math.abs
 
 class CalculatorViewModel : ViewModel() {
     var state by mutableStateOf(CalculatorState())
@@ -55,28 +55,34 @@ class CalculatorViewModel : ViewModel() {
             }
             //clear screen before displaying result
             state = CalculatorState()
-            state = state.copy(number1 = result.toString().take(15))
+            state = if(result % 1.0 == 0.0){
+                state.copy(
+                    number1 = result.toString().dropLast(2)
+                )
+            } else{
+                state.copy(
+                    number1 = result.toString().take(15)
+                )
+            }
+            
+
         }
 
     }
 
     private fun enterDecimal() {
         if (state.operation == null) {
-            if (!state.number1.contains(".")
-                && state.number1.isNotBlank()
+            if (!state.number1.contains(".") && state.number1.isNotBlank()
             ) {
                 state = state.copy(
                     number1 = state.number1 + "."
                 )
-                return
             }
-        } else if (!state.number2.contains(".")
-            && state.number2.isNotBlank()
+        } else if (!state.number2.contains(".") && state.number2.isNotBlank()
         ) {
             state = state.copy(
                 number2 = state.number2 + "."
             )
-            return
         }
 
     }
